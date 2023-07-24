@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Header from './components/Header';
+import Counter from './components/Counter';
+import Button from './components/Button';
+import Setting from './components/Setting';
 
-function App() {
+export default function App() {
+  const [counter, setCounter] = useState(0);
+  const [step, setStep] = useState(1);
+  const [limit, setLimit] = useState(10);
+
+  function handleIncrease() {
+    counter < limit && setCounter(s => s + step);
+  }
+
+  function handleReset() {
+    setCounter(0);
+    setStep(1);
+  }
+
+  function handleDecrease() {
+    counter > -limit && setCounter(s => s - step);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Header />
+      <Counter counter={counter} limit={limit} />
+      <Buttons>
+        <Button className="btn btn-red" onClick={handleDecrease}>
+          - Subtract
+        </Button>
+        <Button className="btn" onClick={handleReset}>
+          Reset
+        </Button>
+        <Button className="btn btn-green" onClick={handleIncrease}>
+          + Add
+        </Button>
+      </Buttons>
+      <Settings>
+        <Setting step={step} handleChange={setStep}>
+          Step
+        </Setting>
+        <Setting limit={limit} handleChange={setLimit}>
+          Limit
+        </Setting>
+      </Settings>
+    </Container>
   );
 }
 
-export default App;
+function Container({ children }) {
+  return <div className="container">{children}</div>;
+}
+
+function Buttons({ children }) {
+  return <div className="btn-holder">{children}</div>;
+}
+
+function Settings({ children }) {
+  return <div className="settings">{children}</div>;
+}
