@@ -29,5 +29,5 @@ To run the application locally, follow these steps:
 
 ## Acknowledgements
 
-- This project was inspired by the need for an easy-to-use travel checklist application.
+- This project was inspired by the need for an easy-to-use counter application.
 - Special thanks to the [React.js](https://reactjs.org/) community for providing a powerful and flexible framework.
